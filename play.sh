@@ -15,6 +15,10 @@ if [ -z "`which omxplayer`" ]; then
 	echo "omxplayer not found"
 	exit 1
 fi
+if [ ! -d "$flagdir" ]; then
+	echo "flagdir does not exist"
+	exit 1
+fi
 if [ ! -d "$videodir" ]; then
 	echo "videodir not set"
 	exit 1
