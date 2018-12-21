@@ -1,0 +1,15 @@
+bindir=/media/friends-player.git
+flagdir=/media
+stophour=23
+stopminute=0
+starthour=7
+startminute=30
+videodir=/media
+videoextensions="mkv"
+lastplayedfile=$flagdir/lastplayed.txt
+playprevfile=$flagdir/playprev.txt
+initialvolume=-3100
+font=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+fontitalic=$font
+fontsize=40
+titlefile=$flagdir/title.srt

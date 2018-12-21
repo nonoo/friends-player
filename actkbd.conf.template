@@ -1,0 +1,28 @@
+# actkbd configuration file
+
+# mute key
+68:::%%bindir%%/omxdbus.sh mute
+# volume down key
+87:::%%bindir%%/omxdbus.sh volumedown
+# volume up key
+88:::%%bindir%%/omxdbus.sh volumeup
+# down
+108:::%%bindir%%/omxdbus.sh volumedown
+# up
+103:::%%bindir%%/omxdbus.sh volumeup
+# space
+57:::%%bindir%%/omxdbus.sh pause
+# left
+105:::%%bindir%%/omxdbus.sh seek -3000000
+# right
+106:::%%bindir%%/omxdbus.sh seek 3000000
+# shift+left
+42+105:::%%bindir%%/omxdbus.sh seek -60000000
+# shift+right
+42+106:::%%bindir%%/omxdbus.sh seek 60000000
+# page up
+109:::%%bindir%%/omxdbus.sh stop
+# page down
+104:::touch %%flagdir%%/playprev.txt; %%bindir%%/omxdbus.sh stop
+# enter
+28:::%%bindir%%/wakeupsleeptoggle.sh
