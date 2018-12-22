@@ -1,15 +1,13 @@
 # actkbd configuration file
 
-# mute key
-68:::%%bindir%%/omxdbus.sh mute
 # volume down key
-87:::%%bindir%%/omxdbus.sh volumedown
+87:::%%bindir%%/volumedown.sh
 # volume up key
-88:::%%bindir%%/omxdbus.sh volumeup
+88:::%%bindir%%/volumeup.sh
 # down
-108:::%%bindir%%/omxdbus.sh volumedown
+108:::%%bindir%%/volumedown.sh
 # up
-103:::%%bindir%%/omxdbus.sh volumeup
+103:::%%bindir%%/volumeup.sh
 # space
 57:::%%bindir%%/omxdbus.sh pause
 # left
