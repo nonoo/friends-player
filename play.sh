@@ -105,6 +105,15 @@ while [ 1 ]; do
 	title=`basename "$filetoplay"`
 	echo -e "1\n00:00:00,000 --> 00:00:05,000\n$title\n" > $titlefile
 
+	if [ -f "$flagdir/volume.txt" ]; then
+		initialvolume=`cat $flagdir/volume.txt`
+		# Converting to millibels.
+		initialvolume=`echo $initialvolume | awk '{print 2000*(log($1)/log(10))}'`
+	fi
+
+	# Converting to decibels.
+	echo $initialvolume | awk '{print exp(($1/2000)*log(10))}' > $flagdir/volume.txt
+
 	omxplayer -b --vol $initialvolume --font $font --italic-font $fontitalic \
 		--subtitles $titlefile --font-size $fontsize --align center "$filetoplay"
 
