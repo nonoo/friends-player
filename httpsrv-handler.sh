@@ -29,12 +29,11 @@ if [[ $REQUEST == "/?cmd=off" ]]; then
 fi
 
 if [[ $REQUEST == "/?cmd=on" ]]; then
-	if [[ "`./croncheck.sh`" == "sleep" ]]; then
-		touch $flagdir/crondisabled.txt
-	else
+	# If cron allows the player to be on.
+	if [[ "`./croncheck.sh`" == "wakeup" ]]; then
 		rm -f $flagdir/crondisabled.txt
+		./wakeup.sh &>/dev/null
 	fi
-	./wakeup.sh &>/dev/null
 fi
 
 echo -e "HTTP/1.0 200 OK\nContent-length: 0\n"
