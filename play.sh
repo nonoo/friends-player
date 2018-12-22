@@ -105,6 +105,12 @@ while [ 1 ]; do
 	title=`basename "$filetoplay"`
 	echo -e "1\n00:00:00,000 --> 00:00:05,000\n$title\n" > $titlefile
 
+	# If there's a subtitle file, append it to the title file.
+	filenamewithoutextension="${filetoplay%.*}"
+	if [ -f "$filenamewithoutextension.srt" ]; then
+		cat "$filenamewithoutextension.srt" >> $titlefile
+	fi
+
 	if [ -f "$flagdir/volume.txt" ]; then
 		initialvolume=`cat $flagdir/volume.txt`
 		# Converting to millibels.
