@@ -117,6 +117,8 @@ while [ 1 ]; do
 	omxplayer -b --vol $initialvolume --font $font --italic-font $fontitalic \
 		--subtitles $titlefile --font-size $fontsize --align center "$filetoplay"
 
+	./bg.sh
+
 	if [ -f $playprevfile ]; then
 		((lastplayedfileindex--))
 		if [[ $lastplayedfileindex = -1 ]]; then
