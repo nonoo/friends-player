@@ -34,8 +34,14 @@ openuri)
 	dbus-send --print-reply=literal --session --dest=org.mpris.MediaPlayer2.omxplayer /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.OpenUri string:"$2" >/dev/null
 	;;
 
-volume)
-	volume=`dbus-send --print-reply=double --session --reply-timeout=500 --dest=org.mpris.MediaPlayer2.omxplayer /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Set string:"org.mpris.MediaPlayer2.Player" string:"Volume" ${2:+double:}$2`
+volumeget)
+	volume=`dbus-send --print-reply=literal --session --reply-timeout=500 --dest=org.mpris.MediaPlayer2.omxplayer /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:"org.mpris.MediaPlayer2.Player" string:"Volume"`
+	[ $? -ne 0 ] && exit 1
+	volume="$(awk '{print $2}' <<< "$volume")"
+	echo "Volume: $volume"
+	;;
+volumeset)
+	volume=`dbus-send --print-reply=literal --session --reply-timeout=500 --dest=org.mpris.MediaPlayer2.omxplayer /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Set string:"org.mpris.MediaPlayer2.Player" string:"Volume" ${2:+double:}$2`
 	[ $? -ne 0 ] && exit 1
 	volume="$(awk '{print $2}' <<< "$volume")"
 	echo "Volume: $volume"
