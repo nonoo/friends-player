@@ -13,3 +13,4 @@ font=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
 fontitalic=$font
 fontsize=40
 titlefile=$flagdir/title.srt
+httpsrvport=80

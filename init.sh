@@ -35,3 +35,6 @@ killall play.sh &>/dev/null
 
 killall cron.sh &>/dev/null
 ./cron.sh &
+
+killall httpsrv.sh  &>/dev/null
+./httpsrv.sh &
