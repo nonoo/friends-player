@@ -14,4 +14,5 @@ if [ -z "`which fbi`" ]; then
 	exit 1
 fi
 
+killall fbi
 fbi -d /dev/fb0 -T 1 -noverbose bg.jpg
