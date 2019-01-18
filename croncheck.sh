@@ -34,6 +34,11 @@ fi
 
 hour=`date +%H`
 minute=`date +%M`
+
+# Remove leading zeroes.
+hour=${hour##+(0)}
+minute=${minute##+(0)}
+
 stop=0
 if (( $hour > $stophour )); then
 	stop=1
