@@ -36,8 +36,8 @@ hour=`date +%H`
 minute=`date +%M`
 
 # Remove leading zeroes.
-hour=${hour##+(0)}
-minute=${minute##+(0)}
+hour=$((10#$hour))
+minute=$((10#$minute))
 
 stop=0
 if (( $hour > $stophour )); then
