@@ -9,8 +9,11 @@ scriptdir=${self%$scriptname}
 cd $scriptdir
 scriptdir=`pwd`
 
-paused=`./omxdbus.sh status | grep Paused | cut -f2 -d' '`
-if [[ "$paused" != "true" ]]; then
-	./omxdbus.sh pause
+displayon=`vcgencmd display_power | cut -f2 -d'='`
+if [[ "$displayon" = "1" ]]; then
+	paused=`./omxdbus.sh status | grep Paused | cut -f2 -d' '`
+	if [[ "$paused" != "true" ]]; then
+		./omxdbus.sh pause
+	fi
+	vcgencmd display_power 0
 fi
-vcgencmd display_power 0
