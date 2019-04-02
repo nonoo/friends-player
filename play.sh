@@ -51,12 +51,9 @@ if [ -z "$fontsize" ]; then
 	echo "fontsize not set"
 	exit 1
 fi
-if [ -z "$titlefile" ]; then
-	echo "titlefile not set"
-	exit 1
-fi
 
 # Reading media files to an array.
+echo "scanning media dir"
 files=()
 while IFS= read -r -d '' -u 9; do
 	filename=$(basename -- "$REPLY")
@@ -71,9 +68,11 @@ while IFS= read -r -d '' -u 9; do
 	done
 
 	if [[ $extensionallowed = 1 ]]; then
+		echo "$REPLY"
 	    files+=("$REPLY")
 	fi
 done 9< <( find $videodir -type f -exec printf '%s\0' {} + )
+echo "scan done"
 
 # Sort the array.
 IFS=$'\n' files=($(sort <<<"${files[*]}"))
@@ -102,13 +101,12 @@ while [ 1 ]; do
 	# Storing the file to play to the last played file.
 	echo $filetoplay > $lastplayedfile
 
-	title=`basename "$filetoplay"`
-	echo -e "1\n00:00:00,000 --> 00:00:05,000\n$title\n" > $titlefile
-
-	# If there's a subtitle file, append it to the title file.
-	filenamewithoutextension="${filetoplay%.*}"
-	if [ -f "$filenamewithoutextension.srt" ]; then
-		cat "$filenamewithoutextension.srt" >> $titlefile
+	filetoplaywithoutextension="${filetoplay%.*}"
+	filenamewithoutextension=`basename $filetoplaywithoutextension`
+	if [ ! -z "$gettitlescript" ]; then
+		title=`bash $gettitlescript "$filenamewithoutextension"`
+	else
+		title=$filetoplay
 	fi
 
 	if [ -f "$flagdir/volume.txt" ]; then
@@ -120,8 +118,10 @@ while [ 1 ]; do
 	# Converting to decibels.
 	echo $initialvolume | awk '{print exp(($1/2000)*log(10))}' > $flagdir/volume.txt
 
-	omxplayer -b --vol $initialvolume --font $font --italic-font $fontitalic \
-		--subtitles $titlefile --font-size $fontsize --align center "$filetoplay"
+	omxplayer -b --vol $initialvolume --font "$font" --italic-font "$fontitalic" \
+		--title-font "$titlefont" --subtitles "$filetoplaywithoutextension.srt" \
+		--font-size $fontsize --title-font-size $titlefontsize --align center \
+		--title "$title" "$filetoplay"
 
 	./bg.sh
 

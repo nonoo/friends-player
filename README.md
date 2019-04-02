@@ -13,6 +13,7 @@ Use a Raspbian image without X.
 ## Usage
 
 - Copy **config-sample** to **config** and edit it if necessary.
+- Copy **gettitle-example.sh** to **gettitle.sh** and edit it if necessary.
 - Copy the contents of **to-rc.local** to **/root**, copy it's **config-sample** to **config** and edit it if necessary.
 - Add **/root/init.sh** to **/etc/rc.local**
 
