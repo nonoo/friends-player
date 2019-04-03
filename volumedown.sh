@@ -17,4 +17,4 @@ if [ ! -d "$flagdir" ]; then
 fi
 
 ./omxdbus.sh volumedown
-./omxdbus.sh volumeget | cut -d' ' -f2 > $flagdir/volume.txt
+./omxdbus.sh volume | cut -d' ' -f2 > $flagdir/volume.txt
