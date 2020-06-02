@@ -121,7 +121,7 @@ while [ 1 ]; do
 	omxplayer -b --vol $initialvolume --font "$font" --italic-font "$fontitalic" \
 		--title-font "$titlefont" --subtitles "$filetoplaywithoutextension.srt" \
 		--font-size $fontsize --title-font-size $titlefontsize --align center \
-		--title "$title" "$filetoplay" --show-time
+		--title "$title" "$filetoplay" --show-time --adev both
 
 	./bg.sh
 
